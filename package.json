@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd backend && node server.js",
+    "start": "cd ./backend/server.js",
     "dev": "nodemon server.js",
-    "postinstall": "cd frontend && npm install && npm run build",
-    "heroku-postbuild": "npm rebuild bcrypt --build-from-source" 
+    "postinstall": "npm rebuild bcrypt --build-from-source"
+    
   },
   "author": "MO Albahly",
   "license": "ISC"

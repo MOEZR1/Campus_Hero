@@ -4,12 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "postinstall": "cd ../frontend && npm install && npm run build"
+    "start": "node ./backend/server.js",
+    "dev": "nodemon ./backend/server.js",
+    "postinstall": "npm rebuild bcrypt --build-from-source && cd frontend && npm install && npm run build"
   },
-  "author": "Mohammed Albahly",
+  "author": "MO Albahly",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
