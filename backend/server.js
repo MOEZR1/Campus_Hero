@@ -10,7 +10,7 @@ const adminRoutes = require('./routes/adminRoutes'); // Import the admin routes
 const emailRoutes = require('./routes/emailRoutes');
 const habitRoutes = require('./routes/habitRoutes');
 const passwordResetRoutes = require('./routes/passwordResetRoutes');
-
+const path = require('path');
 
 
 
@@ -39,7 +39,7 @@ app.use('/habit', habitRoutes);
 app.use('/api', passwordResetRoutes); 
 
 
-const path = require('path');
+
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
