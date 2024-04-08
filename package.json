@@ -1,0 +1,13 @@
+{
+  "name": "campus-habit-hero",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "postinstall": "cd frontend && npm install && npm run build"    
+  },
+  "author": "MO Albahly",
+  "license": "ISC"
+}
