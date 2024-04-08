@@ -1,13 +1,15 @@
 //routes/ useroutes
 const express = require("express");
 const router = express.Router();
-const { test, registerUser, loginUser, getProfile} = require('../controller/authController');
+const { test, registerUser, loginUser, getProfile, updateProfile} = require('../controller/authController');
+const { requireAuth } = require('../middleware/authMiddleware');
 
 // Define routes
 router.get('/', test);
 router.post('/register', registerUser);
 router.post('/login', loginUser);
-router.get('/profile', getProfile);
+router.get('/profile', requireAuth, getProfile);
+router.put('/profile', requireAuth, updateProfile); // Apply requireAuth middleware to protect the route
 router.post('/logout', (req, res) => {
   res.clearCookie('token'); // Clear token cookie
   res.json({ message: 'Logged out successfully' });

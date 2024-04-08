@@ -32,11 +32,13 @@ const ContactForm = () => {
 
   return (
     <div className="container mx-auto p-4"> <br/> <br/> <br/><br/><br/>
+            <title>Contact Us</title>
+
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
         <div className="mb-8"> 
           <h2 className="text-4xl font-bold mb-2">How Can We Help You?</h2>
           <p className="text-lg">
-            We're here to answer your questions, provide support, and hear your feedback. Please fill out the form.
+            We're here to answer your questions, provide support, <br></br>and hear your feedback. Please fill out the form.
           </p>
         </div>
         <form onSubmit={handleSubmit} className="w-full max-w-lg">

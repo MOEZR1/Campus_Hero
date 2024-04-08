@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/userContext'; 
 
 const Login = () => {
-  const { setUser } = useContext(UserContext);
+  const { login } = useContext(UserContext);
   const navigate = useNavigate();
 
 
@@ -22,11 +22,9 @@ const Login = () => {
       if (response.data.error) {
         toast.error(response.data.error);
       } else {
-        setData({}); 
-        toast.success('Login Successful! Welcome!');
-        setUser(data); // Update user state with the logged-in user's info
+        login(response.data.token); // Call the login function from UserContext
+        toast.success('Login Successfully! Welcome!');
         navigate('/'); // Redirect to the home
-        localStorage.setItem('token', response.data.token); // Store token in localStorage
 
       }
     } catch (error) {
@@ -37,8 +35,11 @@ const Login = () => {
 
 
   return (
+    
     // Main container with background color, font, and text color
     <div className="bg-white font-[Reem Kufi] text-[#333]">
+            <title>Login</title>
+
       {/* Container for the login form, centered on the screen */}
       <div className="min-h-screen flex fle-col items-center justify-center lg:p-6 p-4">
         {/* Grid layout for the welcome message and the login form */}
@@ -101,7 +102,7 @@ const Login = () => {
             </div>
             {/* Forgot password link */}
             <div className="text-sm text-center mt-2">
-              <a href="#" className="text-black underline font-bold">
+              <a href="/forgotPassword" className="text-black underline font-bold">
                 Forgot your password?
               </a>
             </div>

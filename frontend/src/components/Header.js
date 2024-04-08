@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
+// Header.js
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate
 import { UserContext } from '../context/userContext';
-import '../App.css'; // Adjust the path if your App.css is in a different location
-
+import logoImage from '../images/logo2.png';
+import memberImage from '../images/man4.png';
 
 function Header() {
   const { user, setUser } = useContext(UserContext);
-  console.log('Header Rendered: User state is:', user); // *** Add this line ***
-
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const logout = async () => {
     try {
@@ -19,87 +19,88 @@ function Header() {
       toast.success('Logged out successfully');
       navigate('/login');
     } catch (error) {
-      console.error('Logout failed', error);
       toast.error('Failed to logout');
     }
+    closeMenu(); // Close the menu after logout
+
   };
 
 
-  return (
-    <div key={user ? user._id : 'logged-out'}>
-      <nav className="bg-white fixed w-full z-20 top-0 start-0 shadow-lg rounded-bl-3xl rounded-br-3xl ">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
-          <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            <img
-              src={process.env.PUBLIC_URL + 'public/Logo.png'}
-              className="h-8"
-              alt="CampusHabitHero Logo"
-            />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Flowbite
-            </span>
+  
+  const renderLinks = () => {
+    if (user) {
+      if (user.isAdmin) {
+        // Admin-specific links
+        return (
+          <>
+            <Link to="/AdminDashboard" onClick={closeMenu}className={`nav-link ${currentPage === '/AdminDashboard' ? 'active' : ''}`}>Admin Dashboard</Link>
+            {/* More admin links can be added here */}
+          </>
+        );
+      } else {
+        // Regular user links
+        return (
+          <>
+          <Link to="/dashboard" onClick={closeMenu} className={`nav-link ${currentPage === '/dashboard' ? 'active' : ''}`}>
+            Dashboard
           </Link>
-          <div className="flex items-center space-x-3 md:space-x-0 rtl:space-x-reverse header-links">
-            {user ? (
-              <>
-                <Link
-                  to="/dashboard"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  to="/habit-tracking"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Habit Tracking
-                </Link>
-                <Link
-                  to="/deadlines"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
-                >
-                  Deadlines
-                </Link>
-                <Link
-                  to="/contact"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Contact 
-                </Link>
-                <Link
-                  to="/resource-hub"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
-                >
-                  Resource Hub
-                </Link>
+            <Link to="/habit-tracking" onClick={closeMenu}className={`nav-link ${currentPage === '/habit-tracking' ? 'active' : ''}`}>Habit Tracking</Link>
+            <Link to="/deadlines" onClick={closeMenu}className={`nav-link ${currentPage === '/deadlines' ? 'active' : ''}`}>Deadlines</Link>
+            <Link to="/contact" onClick={closeMenu}className={`nav-link ${currentPage === '/contact' ? 'active' : ''}`}>Contact</Link>
+            <Link to="/resource-hub" onClick={closeMenu}className={`nav-link ${currentPage === '/resource-hub' ? 'active' : ''}`}>Resource Hub</Link>
+            {/* More user links can be added here */}
+          </>
+        );
+      }
+    } else {
+      // Links for guests
+      return (
+        <>
+          <Link to="/login" onClick={closeMenu}className="nav-link login-button">Login</Link>
+          <Link to="/register" onClick={closeMenu} className="nav-link signup-button">Sign Up</Link>
 
-                <button
-                  onClick={logout}
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 header-links"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 header-links"
-                >
-                  Login
-                </Link>
-                <Link
-                  to="/register"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 header-links"
-                >
-                  Sign Up
-                </Link>
-              </>
-            )}
+        </>
+      );
+    }
+  };
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  const currentPage = window.location.pathname;
+
+  return (
+    <header className="bg-gray-100 fixed w-full z-10 top-0 shadow-md">
+      <div className="max-w-6xl mx-auto px-5 lg:px-0 flex justify-between items-center h-16">
+        <Link to="/" className="flex items-center">
+          <img src={logoImage} alt="Company Logo" className="h-10 w-auto mr-3" />
+        </Link>
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden">
+          <div className="space-y-2">
+            <span className="block w-8 h-0.5 bg-gray-600"></span>
+            <span className="block w-8 h-0.5 bg-gray-600"></span>
+            <span className="block w-8 h-0.5 bg-gray-600"></span>
           </div>
+        </button>
+        <div className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-gray-100 md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${isMenuOpen ? 'top-16' : 'top-[-490px]'}`}>
+          {renderLinks()}
+          {user && (
+        <div className="flex items-center space-x-4">
+        <Link to="/profile" onClick={closeMenu}className="nav-link">
+                <img
+    src={user.avatar || memberImage}
+    alt="User avatar"
+    className="rounded-full h-8 w-8"
+                />
+              </Link>
+              <button onClick={logout}  className="nav-link bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
-      </nav>
-    </div>
+      </div>
+    </header>
   );
 }
 

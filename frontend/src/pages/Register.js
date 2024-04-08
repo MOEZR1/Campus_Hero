@@ -22,7 +22,7 @@ const Register = () => {
         toast.error(response.data.error);
       } else {
         setData({});
-        toast.success('Registration Successful! Please log in now.');
+        toast.success('Registration Successfully! Please log in now.');
         navigate('/login');
       }
     } catch (error) {
@@ -34,6 +34,8 @@ const Register = () => {
   return (
     // Main container with background color, font, and text color
     <div className="bg-white font-[Reem Kufi] text-[#333]">
+            <title>Register</title>
+
       {/* Container for the register form, centered on the screen */}
       <div className="min-h-screen flex fle-col items-center justify-center lg:p-6 p-4">
         {/* Grid layout for the welcome message and the register form */}
@@ -97,11 +99,7 @@ const Register = () => {
                     <button className="block w-full max-w-xs mx-auto bg-black hover:bg-gray-800 text-white rounded-lg px-3 py-3 font-semibold" type="submit">Register</button>
                   </div>
                   {/* Forgot password link */}
-                  <div className="text-sm text-center mt-2">
-                    <a href="#" className="text-black underline font-bold">
-                    Forgot your password?
-                    </a>
-                  </div>
+
                 </form>
               </div>
             </div>

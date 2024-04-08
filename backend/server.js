@@ -1,38 +1,44 @@
 const express = require('express');
-const router = express.Router();
 const dotenv = require('dotenv').config();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const app = express();
 const contactRoutes = require('./routes/contactRoutes');
+const deadlineRoutes = require('./routes/deadlineRoutes'); 
+const userRoutes = require('./routes/userRoutes');
+const adminRoutes = require('./routes/adminRoutes'); // Import the admin routes
+const emailRoutes = require('./routes/emailRoutes');
+const habitRoutes = require('./routes/habitRoutes');
+const passwordResetRoutes = require('./routes/passwordResetRoutes');
 
-// Import the router from authController.js
-const authRouter = require('./controller/authController');
 
 
+
+const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000', // Specify the origin of your React app
-  credentials: true // Allow cookies to be sent with the request
+  origin: 'http://localhost:3000',
+  credentials: true
 }));
 
-//middleware 
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
+app.use('/uploads', express.static('uploads'));
 
-
-
-// Connect to Database
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Database connected'))
-  .catch((err) => console.log('Database not connected', err));
+  .catch((err) => console.error('Database not connected', err));
 
-const userRoutes = require('./routes/userRoutes');
 app.use('/', userRoutes);
-
 app.use('/contact', contactRoutes);
+app.use('/deadlines', deadlineRoutes); // Updated route path
+app.use('/admin', adminRoutes); // Use admin routes
+app.use('/emails', emailRoutes);
+app.use('/habit', habitRoutes);
+app.use('/api', passwordResetRoutes); 
+
+
 
 
 const port = process.env.PORT || 5000;

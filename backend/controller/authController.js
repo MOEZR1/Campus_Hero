@@ -56,19 +56,44 @@ const loginUser = async (req, res) => {
 
         // Check if passwords match 
         const match = await comparePassword(password, user.password);
-        if (match) {
-            jwt.sign({ email: user.email, id: user._id }, process.env.JWT_SECRET, {}, (err, token) => {
-                if (err) throw err;
-                res.cookie('token', token).json(user);
-            });
-        } else {
-            res.json({ error: 'Password do not match' });
+        if (!match) {
+            return res.json({ error: 'Password do not match' });
         }
+
+        // Sign the token with isAdmin property
+        jwt.sign(
+            {
+              id: user._id, // The ID of the user
+              isAdmin: user.isAdmin // The admin status of the user
+            }, 
+            process.env.JWT_SECRET,
+            {
+              expiresIn: '1d' // The expiration time of the token
+            },
+            (err, token) => {
+              if (err) {
+                // Handle error
+                return res.status(500).json({ error: 'Error signing token' });
+              }
+              // Set the token in a cookie or send it in the response
+              res.cookie('token', token, { httpOnly: true });
+              // Send the response with the token and user information
+              res.json({
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                isAdmin: user.isAdmin
+              });
+            }
+          );
+          
+        
     } catch (error) {
-        console.log(error);
+        console.error('Login error:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
 
 // Get Profile Endpoint
 const getProfile = (req, res) => {
@@ -97,9 +122,39 @@ const getProfile = (req, res) => {
     }
 };
 
+// Profile Update Endpoint
+const updateProfile = async (req, res) => {
+    try {
+      const { id } = req.user; // Changed from userId to id
+      const { username, email } = req.body;
+
+      if (!username || !email) {
+        return res.status(400).json({ error: 'Username and email are required.' });
+      }
+
+      const user = await User.findByIdAndUpdate(id, { username, email }, { new: true, runValidators: true });
+
+      if (!user) {
+        return res.status(404).json({ error: 'User not found.' });
+      }
+
+      const userWithoutPassword = { ...user._doc, password: undefined };
+      res.json(userWithoutPassword);
+    } catch (error) {
+      console.error('Profile update error:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+
+  
+
+
+
 module.exports = {
     test,
     registerUser,
     loginUser,
-    getProfile
+    getProfile,
+    updateProfile
 };

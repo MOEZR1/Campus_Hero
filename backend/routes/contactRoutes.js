@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const Contact = require('../models/Contact');
 const transporter = require('../config/nodemailer');
+const Email = require('../models/Email'); // Ensure you have an Email model similar to your Contact model
+
 
 // Handle POST request to /contact
 router.post('/', async (req, res) => {
@@ -17,6 +19,19 @@ router.post('/', async (req, res) => {
       company,
       message
     });
+
+
+    // Create a new email document
+    const newEmail = new Email({
+      from: email, // Assuming 'email' is the email address of the person submitting the form
+      to: 'owner@example.com', // Your admin or support email
+      subject: 'New Contact Form Submission',
+      text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nCompany: ${company}\nMessage: ${message}`,
+      html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Phone: ${phone}</p><p>Company: ${company}</p><p>Message: ${message}</p>`
+    });
+
+    // Save the email document to the database
+    await newEmail.save();
 
     // Save the contact document to the database
     await newContact.save();
