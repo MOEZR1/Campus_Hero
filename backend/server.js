@@ -38,15 +38,19 @@ app.use('/habit', habitRoutes);
 app.use('/api', passwordResetRoutes); 
 
 
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Log the error for debugging
+  res.status(500).json({ message: 'Something went wrong' });
+});
 
-
-// Serve static files from React app
+// Serving frontend files
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// For any route not handled by your API, send back React's index.html file.
+// Wildcard route to serve index.html for any unhandled requests
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
+
 
 
 const port = process.env.PORT || 5000;
