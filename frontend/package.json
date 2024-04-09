@@ -20,9 +20,7 @@
     "web-vitals": "^2.1.4"
 
   },
-  "homepage": {
-   "baseURL": "https://campus-habit-hero.onrender.com"
-  },
+  "homepage": "https://campus-habit-hero.onrender.com",
 
   "scripts": {
     "start": "react-scripts start",
