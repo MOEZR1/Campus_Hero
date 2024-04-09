@@ -24,7 +24,7 @@ import { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 
 
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'https://campus-habit-hero.onrender.com';
 axios.defaults.withCredentials = true
 
 function App() {
