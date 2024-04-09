@@ -11,6 +11,9 @@ const emailRoutes = require('./routes/emailRoutes');
 const habitRoutes = require('./routes/habitRoutes');
 const passwordResetRoutes = require('./routes/passwordResetRoutes');
 const path = require('path');
+
+
+
 const app = express();
 
 app.use(cors({
