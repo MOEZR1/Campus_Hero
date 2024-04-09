@@ -44,11 +44,11 @@ app.use((err, req, res, next) => {
 });
 
 // Serving frontend files
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.use(express.static(path.join(__dirname, '/frontend/build')));
 
 // Wildcard route to serve index.html for any unhandled requests
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+  res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });
 
 
