@@ -6,9 +6,9 @@
   "scripts": {
     "start": "cd backend && node server.js",
     "dev": "nodemon server.js",
-    "postinstall": "npm rebuild bcrypt --build-from-source"
-    
+    "postinstall": "cd frontend && npm install && npm run build && cd ../backend && npm rebuild bcrypt --build-from-source"
   },
+  
   "author": "MO Albahly",
   "license": "ISC"
 }
