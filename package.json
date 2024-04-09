@@ -10,5 +10,8 @@
     "start": "node backend/server.js"
   },
   "author": "Mo",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "string.prototype.endswith": "^1.0.2"
+  }
 }
