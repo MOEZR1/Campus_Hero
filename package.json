@@ -7,12 +7,7 @@
     "install:frontend": "npm install --prefix frontend",
     "install:backend": "npm install --prefix backend",
     "build:frontend": "npm run build --prefix frontend",
-    "build:backend": "npm run build --prefix backend",
-    
-    "start:frontend": "npm start --prefix frontend",
-    "start": "node backend/server.js",
-    "deploy": "npm run install:frontend && npm run build:frontend",
-    "postinstall": "npm run install:backend"
+    "start": "node backend/server.js"
   },
   "author": "Mo",
   "license": "ISC"
