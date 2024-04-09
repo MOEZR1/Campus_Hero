@@ -11,8 +11,10 @@ const emailRoutes = require('./routes/emailRoutes');
 const habitRoutes = require('./routes/habitRoutes');
 const passwordResetRoutes = require('./routes/passwordResetRoutes');
 const path = require('path');
+import { fileURLToPath } from "url";
 
-
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const app = express();
 
@@ -40,7 +42,7 @@ app.use('/api', passwordResetRoutes);
 
 
 // Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, 'frontend/build')));
+app.use(express.static(path.join(__dirname, '/frontend/build')));
 
 // Anything that doesn't match the above, send back index.html
 app.get('*', (req, res) => {
