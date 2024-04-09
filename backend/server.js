@@ -39,15 +39,14 @@ app.use('/api', passwordResetRoutes);
 
 
 
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, '/frontend/build')));
 
-// Anything that doesn't match the above, send back index.html
+// Serve static files from React app
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+// For any route not handled by your API, send back React's index.html file.
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/frontend/build/index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
-
-
 
 
 const port = process.env.PORT || 5000;
