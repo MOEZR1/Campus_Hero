@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/server.js",
-    "dev": "nodemon backend/server.js",
-    "postinstall": "npm install --prefix backend && npm rebuild bcrypt --build-from-source --prefix backend"
+    "start": "cd backend && node server.js",
+    "dev": "nodemon server.js"
+    
+    
   },
   "author": "MO Albahly",
   "license": "ISC"
