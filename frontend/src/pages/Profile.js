@@ -56,38 +56,7 @@ const Profile = () => {
     
     return <div>Loading user data...</div>; // Render a loading state
   };
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAvatar(file);
-    }
-  };
-
-  const uploadAvatar = async () => {
-    if (!avatar) {
-      toast.error('Please select an avatar to upload.');
-      return;
-    }
-    const formData = new FormData();
-    formData.append('avatar', avatar);
-
-    try {
-      const response = await axios.post('/upload-avatar', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${user.token}`
-        }
-      });
-
-      if (response.data && response.data.avatarUrl) {
-        setUser({ ...user, avatar: response.data.avatarUrl });
-        toast.success('Avatar uploaded successfully');
-      }
-    } catch (error) {
-      console.error('Failed to upload avatar', error);
-      toast.error('Failed to upload avatar');
-    }
-  };
+ 
   
   return (
     <div className="profile-container"> 
