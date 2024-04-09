@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "npm run build:frontend && npm run build:backend",
-    "build:frontend": "cd ../frontend && npm install && npm run build",
-    "build:backend": "npm install",
-    "postinstall": "npm run build"
+    "dev": "nodemon server.js",
+    "postinstall": "npm rebuild bcrypt --build-from-source"
+
   },
   "author": "MO Albahly",
   "license": "ISC",
