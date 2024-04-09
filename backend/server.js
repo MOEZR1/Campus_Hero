@@ -10,7 +10,7 @@ const adminRoutes = require('./routes/adminRoutes'); // Import the admin routes
 const emailRoutes = require('./routes/emailRoutes');
 const habitRoutes = require('./routes/habitRoutes');
 const passwordResetRoutes = require('./routes/passwordResetRoutes');
-
+const path = require('path');
 
 
 
@@ -38,12 +38,20 @@ app.use('/habit', habitRoutes);
 app.use('/api', passwordResetRoutes); 
 
 
+
+
+// Serving frontend files
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+// Wildcard route to serve index.html for any unhandled requests
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack); // Log the error for debugging
   res.status(500).json({ message: 'Something went wrong' });
 });
-
-
 
 
 const port = process.env.PORT || 5000;

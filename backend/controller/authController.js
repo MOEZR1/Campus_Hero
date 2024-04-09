@@ -2,7 +2,7 @@
 const User = require('../models/User');
 const { hashPassword, comparePassword } = require('../helpers/auth');
 const jwt = require('jsonwebtoken');
-const path = require('path');
+
 
 
 
@@ -145,13 +145,6 @@ const updateProfile = async (req, res) => {
     }
 };
 
-// Serving frontend files
-app.use(express.static(path.join(__dirname, '/frontend/build')));
-
-// Wildcard route to serve index.html for any unhandled requests
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
-});
 
 
   
@@ -159,7 +152,7 @@ app.get('*', (req, res) => {
 
 
 module.exports = {
-    test,
+    
     registerUser,
     loginUser,
     getProfile,
