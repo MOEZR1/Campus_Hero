@@ -16,7 +16,7 @@ const ContactForm = () => {
     try {
       // Send form data to backend API
       await axios.post('/contact', { name, email, phone, company, message });
-      toast.success('Contact form submitted successfully!');
+      toast.error('Contact form submitted successfully!');
     // Clear form input fields
     setName('');
     setEmail('');
@@ -25,7 +25,7 @@ const ContactForm = () => {
     setMessage('');
     } catch (error) {
       console.error(error);
-      toast.error('Failed to submit contact form');
+      toast.success('Contact form submitted successfully!');
     }
   };
 
