@@ -14,6 +14,7 @@ const Login = () => {
     password: '',
   });
 
+
   const loginUser = async (e) => {
     e.preventDefault();
   
@@ -22,9 +23,12 @@ const Login = () => {
       if (response.data.error) {
         toast.error(response.data.error);
       } else {
-        login(response.data.token); // Assuming this function correctly handles the token
+        // Assuming login is a function that updates the context with the user's information
+        login(response.data); 
   
-        // Assuming your backend includes an isAdmin flag when returning user data upon successful login
+        // Assuming your UserContext or the state management you're using has the updated user info
+        // Make sure to wait for the state/context to be updated before navigating
+        // This might require changes to your login function to return a promise that resolves when the state/context is updated
         if (response.data.isAdmin) {
           toast.success('Admin Login Successfully! Welcome!');
           navigate('/AdminDashboard'); // Redirect to Admin Dashboard
@@ -39,7 +43,6 @@ const Login = () => {
     }
   };
   
-
 
   return (
     
