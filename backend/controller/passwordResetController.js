@@ -20,7 +20,7 @@ exports.forgotPassword = async (req, res) => {
     await user.save({ validateBeforeSave: false });
 
     // Create reset password url
-    const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
+    const resetUrl = `https://campus-habit-hero.onrender.com/reset-password/${resetToken}`;
     const message = `You are receiving this email because you (or someone else) has requested the reset of a password. If this was you, click the link below to proceed.  \n\n ${resetUrl}`;
 
     // Send email

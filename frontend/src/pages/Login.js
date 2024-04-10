@@ -22,14 +22,15 @@ const Login = () => {
       if (response.data.error) {
         toast.error(response.data.error);
       } else {
-        login(response.data.token); // Save the token, usually in context or state for global access
-        toast.success('Login Successfully! Welcome!');
+        login(response.data.token); // Assuming this function correctly handles the token
   
-        // Check if the logged in user is an admin
+        // Assuming your backend includes an isAdmin flag when returning user data upon successful login
         if (response.data.isAdmin) {
-          navigate('/AdminDashboard'); // Redirect to the admin dashboard
+          toast.success('Admin Login Successfully! Welcome!');
+          navigate('/AdminDashboard'); // Redirect to Admin Dashboard
         } else {
-          navigate('/dashboard'); // Redirect to the standard user dashboard
+          toast.success('Login Successfully! Welcome!');
+          navigate('/dashboard'); // Redirect to standard Dashboard
         }
       }
     } catch (error) {
