@@ -27,7 +27,7 @@ const Login = () => {
   
         // Check if the logged in user is an admin
         if (response.data.isAdmin) {
-          navigate('/adminDashboard'); // Redirect to the admin dashboard
+          navigate('/AdminDashboard'); // Redirect to the admin dashboard
         } else {
           navigate('/dashboard'); // Redirect to the standard user dashboard
         }
