@@ -7,7 +7,7 @@ const UserRoute = ({ children }) => {
   const { user } = useContext(UserContext);
 
   if (!user || user.isAdmin) {
-    return <Navigate to="/adminDashboard" replace />;
+    return <Navigate to="/AdminDashboard" replace />;
   }
 
   return children;
