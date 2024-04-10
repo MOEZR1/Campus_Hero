@@ -30,11 +30,11 @@ const Login = () => {
         // Make sure to wait for the state/context to be updated before navigating
         // This might require changes to your login function to return a promise that resolves when the state/context is updated
         if (response.data.isAdmin) {
-          toast.success('Admin Login Successfully! Welcome!');
-          navigate('/AdminDashboard'); // Redirect to Admin Dashboard
-        } else {
           toast.success('Login Successfully! Welcome!');
-          navigate('/dashboard'); // Redirect to standard Dashboard
+          navigate('/dashboard'); // Redirect to Admin Dashboard
+        } else {
+          toast.success('Admin Login Successfully! Welcome!');
+          navigate('/AdminDashboard'); // Redirect to standard Dashboard
         }
       }
     } catch (error) {
