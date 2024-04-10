@@ -23,18 +23,16 @@ const Login = () => {
       if (response.data.error) {
         toast.error(response.data.error);
       } else {
-        // Assuming login is a function that updates the context with the user's information
-        login(response.data); 
+        // Call the login function with the user data
+        await login(response.data); // Ensure this is an async call so that context updates
   
-        // Assuming your UserContext or the state management you're using has the updated user info
-        // Make sure to wait for the state/context to be updated before navigating
-        // This might require changes to your login function to return a promise that resolves when the state/context is updated
+        // After the context updates, redirect based on the user type
         if (response.data.isAdmin) {
-          toast.success('Login Successfully! Welcome!');
-          navigate('/dashboard'); // Redirect to Admin Dashboard
-        } else {
           toast.success('Admin Login Successfully! Welcome!');
-          navigate('/AdminDashboard'); // Redirect to standard Dashboard
+          navigate('/AdminDashboard'); // Redirect to Admin Dashboard
+        } else {
+          toast.success('Login Successfully! Welcome!');
+          navigate('/dashboard'); // Redirect to standard Dashboard
         }
       }
     } catch (error) {
