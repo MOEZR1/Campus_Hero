@@ -8,7 +8,6 @@ const Profile = () => {
   const [editMode, setEditMode] = useState(false);
   const [editedUsername, setEditedUsername] = useState('');
   const [editedEmail, setEditedEmail] = useState('');
-  const [avatar, setAvatar] = useState(null); // Add a new state for avatar file
 
   useEffect(() => {
     // Only set state if user is not null

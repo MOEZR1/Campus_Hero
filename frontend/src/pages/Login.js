@@ -16,22 +16,28 @@ const Login = () => {
 
   const loginUser = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const response = await axios.post('/login', data); 
+      const response = await axios.post('/login', data);
       if (response.data.error) {
         toast.error(response.data.error);
       } else {
-        login(response.data.token); // Call the login function from UserContext
+        login(response.data.token); // Save the token, usually in context or state for global access
         toast.success('Login Successfully! Welcome!');
-        navigate('/dashboard'); // Redirect to the home
-
+  
+        // Check if the logged in user is an admin
+        if (response.data.isAdmin) {
+          navigate('/adminDashboard'); // Redirect to the admin dashboard
+        } else {
+          navigate('/dashboard'); // Redirect to the standard user dashboard
+        }
       }
     } catch (error) {
-      console.log(error);
-      toast.error('Login failed. Please try again.'); 
+      console.error(error);
+      toast.error('Login failed. Please try again.');
     }
   };
+  
 
 
   return (

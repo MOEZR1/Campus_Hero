@@ -87,7 +87,7 @@ function Header() {
         <div className="flex items-center space-x-4">
         <Link to="/profile" onClick={closeMenu}className="nav-link">
                 <img
-    src={user.avatar || memberImage}
+    src={ memberImage}
     alt="User avatar"
     className="rounded-full h-8 w-8"
                 />

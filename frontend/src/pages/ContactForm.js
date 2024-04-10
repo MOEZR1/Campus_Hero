@@ -12,23 +12,22 @@ const ContactForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
       // Send form data to backend API
       await axios.post('/contact', { name, email, phone, company, message });
       toast.success('Contact form submitted successfully!');
-    // Clear form input fields
-    setName('');
-    setEmail('');
-    setPhone('');
-    setCompany('');
-    setMessage('');
+      // Clear form input fields
+      setName('');
+      setEmail('');
+      setPhone('');
+      setCompany('');
+      setMessage('');
     } catch (error) {
       console.error(error);
-      toast.success('Failed to submit contact form');
+      toast.error('Failed to submit contact form'); // Corrected this line to toast.error
     }
   };
-
 
   return (
     <div className="bg-white font-[Reem Kufi] text-[#333]"> 
