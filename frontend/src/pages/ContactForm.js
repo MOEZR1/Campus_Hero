@@ -31,17 +31,24 @@ const ContactForm = () => {
 
 
   return (
-    <div className="container mx-auto p-4"> <br/> <br/> <br/><br/><br/>
+    <div className="bg-white font-[Reem Kufi] text-[#333]"> 
             <title>Contact Us</title>
 
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-        <div className="mb-8"> 
-          <h2 className="text-4xl font-bold mb-2">How Can We Help You?</h2>
-          <p className="text-lg">
-            We're here to answer your questions, provide support, <br></br>and hear your feedback. Please fill out the form.
+            <div className="min-h-screen flex fle-col items-center justify-center lg:p-10 p-4 grid md:grid-cols-2 items-center gap-10 max-w-2x3 w-full"> 
+          {/* Container for the welcome message */}
+          <div className="max-md:text-center">
+            {/* Heading for the welcome message */}
+            <h2 className="text-6xl font-bold lg:leading-[50px] text-black mb-4">
+            Let's Get In Touch! 
+          </h2>
+            {/* Subtitle for the welcome message */}
+            <p className="text-lg mb-4">
+            Fill out the form, and we'll reach out soon. We appreciate your interest in <span style={{ color: 'blue' }}>Campus Habit Hero</span>.
           </p>
-        </div>
-        <form onSubmit={handleSubmit} className="w-full max-w-lg">
+          </div>
+
+
+          <form onSubmit={handleSubmit} className="bg-[#F2F2F2] rounded-xl px-6 py-8 space-y-6 max-w-md md:ml-auto max-md:mx-auto w-full shadow-lg">
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="name">

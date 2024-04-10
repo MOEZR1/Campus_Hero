@@ -31,7 +31,7 @@ const FAQs = () => {
     <div className="container mx-auto p-8" > 
           <title>FAQs</title>
 
-      <h1 className="text-5xl font-bold text-center mb-6"><br/><br/>FAQs</h1>
+      <h1 className="text-5xl font-bold text-center mb-6">FAQs</h1>
       <div className="space-y-4">
         {faqs.map((faq, index) => (
           <div key={index} className="bg-white p-4 rounded-lg shadow-md">

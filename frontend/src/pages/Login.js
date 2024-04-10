@@ -24,7 +24,7 @@ const Login = () => {
       } else {
         login(response.data.token); // Call the login function from UserContext
         toast.success('Login Successfully! Welcome!');
-        navigate('/'); // Redirect to the home
+        navigate('/dashboard'); // Redirect to the home
 
       }
     } catch (error) {

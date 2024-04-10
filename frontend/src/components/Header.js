@@ -46,7 +46,6 @@ function Header() {
           </Link>
             <Link to="/habit-tracking" onClick={closeMenu}className={`nav-link ${currentPage === '/habit-tracking' ? 'active' : ''}`}>Habit Tracking</Link>
             <Link to="/deadlines" onClick={closeMenu}className={`nav-link ${currentPage === '/deadlines' ? 'active' : ''}`}>Deadlines</Link>
-            <Link to="/contact" onClick={closeMenu}className={`nav-link ${currentPage === '/contact' ? 'active' : ''}`}>Contact</Link>
             <Link to="/resource-hub" onClick={closeMenu}className={`nav-link ${currentPage === '/resource-hub' ? 'active' : ''}`}>Resource Hub</Link>
             {/* More user links can be added here */}
           </>
